@@ -12,9 +12,10 @@
     <form th:action="@{/regist-review}" method="POST" 
     		th:object="${reviewRegistForm}">
 		【店舗ID】<br>
-		<input type="text" th:field="*{restaurantId}"><br>
-    	<div th:if="${#fields.hasErrors('restaurantId')}" th:errors="*{restaurantId}" class="error-msg"></div>
-		<br>
+		<p th:text = "*{restaurntId} + '　' + *{restaurantName}" ></p>
+		<input type="hidden" th:field="*{restrantId}">
+		<input type="hidden" th:field="*{restrantName}"
+		
     	【利用者ID】<br>
     	<input type="text" th:field="*{userId}"><br>
     	<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="error-msg"></div>
@@ -24,7 +25,14 @@
     	<div th:if="${#fields.hasErrors('visitDate')}" th:errors="*{visitDate}" class="error-msg"></div>
 		<br>
     	【評価】(1-5)<br>
-		<input type="text" th:field="*{rating}"><br>
+		<select th:field="*{rating}">
+			<option value="0">選択してください。</option>
+				<option th:each ="option : ${#numbers.sequence(1,5)}"
+					th:value="${option}"
+					th:text="${option}"
+					th:selected="${option == rating}">
+				</option>
+		</select><br>
     	<div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="error-msg"></div>
 		<br>
     	【一言コメント】<br>
@@ -33,6 +41,9 @@
 		<br>
     	<input type="submit" value="登録" class="btn">
     </form>
+	
+	<br>
+	<a th:href="@{/top}">トップページに戻る</a>
 
 </body>
 </html>

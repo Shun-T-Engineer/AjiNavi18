@@ -26,11 +26,11 @@
 
 		<tr th:each="restaurant : ${restaurantList}">
 			<td>
-				<from th:action="@{/show-review-form}" method="POST" >
+				<form th:action="@{/show-review-form}" method="POST" >
 					<input type="hidden" name="restaurantId" th:value="${restaurant.restaurantId}">
 					<input type="hidden" name="restaurantName" value="${restaurant.restaurantName}">
 					<input type="submit" value="登録" class="tbtn"> 
-				</from>
+				</form>
 			</td>
 			<td th:text="${restaurant.restaurantId}"></td>
 			<td th:text="${restaurant.restaurantName}"></td>
